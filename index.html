@@ -1,10 +1,14 @@
+
+<!doctype html>
+<html>
+    <head>
 <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
 <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script src="https://kalwalt.github.io/kalwalt-interactivity-AR/resources/js/libs/stats.min.js"></script>
 <style>
-  .arjs-loader {
+    .arjs-loader {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -15,59 +19,95 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    }
 
-  .arjs-loader div {
+    .arjs-loader div {
     text-align: center;
     font-size: 1.25em;
     color: white;
-  }
+    }
+
+    .ui {
+    position: fixed;
+
+    margin: 0.5rem;
+
+    background-color: rgba( 255,255,255,0.6 );
+    border-radius: 6px;
+    }
+    .stats {
+    top: 0;
+    left: 0;
+    z-index: 200;
+    margin: 0.5rem;
+    padding: 0.5rem 0.5rem 0;
+    }
+
+    .stats-item {
+    margin: 0 0 0.5rem;
+
+    }
+
+    .stats-item-title {
+    margin: 0 0 0.25rem;
+
+    font-size: 0.75rem;
+    }
+
+    #stats div {
+    position: relative !important;
+    }
 </style>
+<!-- Notes
+    position="200 350 300" -->
 
 <!-- rawgithack development URL -->
 <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
-
+</head>
 <body style='margin : 0px; overflow: hidden;'>
    <!-- minimal loader shown until image descriptors are loaded -->
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
+      <div id="stats" class="ui stats">
+      <div id="stats1" class="stats-item">
+        <p class="stats-item-title">
+          Main
+        </p>
+      </div>
+
+      <div id="stats2" class="stats-item">
+        <p class="stats-item-title">
+          Worker
+        </p>
+      </div>
+    </div>
     <a-scene
         vr-mode-ui="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'
-        id="scene"
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'
         gesture-detector
         embedded
-    >
-        <a-assets>
-                <a-asset-item
-                    id="animated-asset"
-                    src="https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/iam-rocketman/web-ar/main/assets/asset.glb">
-                </a-asset-item>
-        </a-assets>
+        >
 
         <!-- use rawgithack to retrieve the correct url for nft marker (see 'trex' below) -->
         <a-nft
-            id="animated-marker"
-            type='nft' url='https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/iam-rocketman/web-ar/main/assets/anscer/anscer_logo_500x500'
+            type='nft' url='https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/iam-rocketman/web-ar/main/assets/robot/ANSCER_LOGO_1000'
             smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'
-            raycaster="objects: .clickable"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerA"
+            raycaster='objects: .clickable'
+            emitevents='true'
+            cursor='fuse: false; rayOrigin: mouse;'
         >
             <a-entity
-                    id="bowser-model"
-                    scale="5 5 5"
-                    position="100 100 0"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    class="clickable"
-                    gesture-handler
+                gltf-model='https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/iam-rocketman/web-ar/main/assets/asset.gltf'
+                position="200 350 30"
+                scale="1 1 1"
+                class="clickable"
+                gesture-handler
                 >
             </a-entity>
         </a-nft>
-        <a-entity camera></a-entity>
+		<a-entity camera></a-entity>
     </a-scene>
 </body>
+</html>
