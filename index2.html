@@ -39,7 +39,7 @@
   </div>
     <a-scene
         vr-mode-ui="enabled: false;"
-        renderer="logarithmicDepthBuffer: false;"
+        renderer="logarithmicDepthBuffer: true;"
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'
         gesture-detector
         embedded
@@ -58,7 +58,7 @@
                 scale="1 1 1"
                 position="0 0 0"
                 class="clickable"
-                gesture-handler
+                gesture-handler="minScale: 0.25; maxScale: 10"
                 >
             </a-entity>
         </a-nft>
